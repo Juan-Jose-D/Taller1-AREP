@@ -16,14 +16,11 @@ import java.util.Map;
  */
 
 public class HttpServer {
-
-    // Lista de componentes que almacenará el servidor
     public static final List<Component> components = new ArrayList<>();
 
     public static void main(String[] args) {
         ServerSocket serverSocket = null;
         try {
-            // Iniciamos el servidor en el puesto 35000
             serverSocket = new ServerSocket(35000);
         } catch (IOException e) {
             System.err.println("Could not listen on port: 35000.");
@@ -35,7 +32,6 @@ public class HttpServer {
             Socket clientSocket = null;
             try {
                 System.out.println("Servidor iniciado en el puerto 35000");
-                // El servidor espera y acepta una nueva conexión de cliente
                 clientSocket = serverSocket.accept();
                 handleRequest(clientSocket);
             } catch (IOException e) {
@@ -55,11 +51,8 @@ public class HttpServer {
     private static void handleRequest(Socket clientSocket) throws IOException{
         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         OutputStream out = clientSocket.getOutputStream();
-
-        // Lee la primera línea de la solicitud HTTP
         String requestLine = in.readLine();
         if (requestLine == null) return;
-
         System.out.println("Solicitud: " + requestLine);
         String[] requestParts = requestLine.split(" ");
         String method = requestParts[0];
@@ -90,7 +83,6 @@ public class HttpServer {
     static void handleApiRequest(String method, String path, BufferedReader in, OutputStream out) throws IOException {
         String response;
         if (method.equals("GET")) {
-            // Construir JSON manualmente para mantener el formato correcto
             StringBuilder jsonResponse = new StringBuilder("[");
             for (int i = 0; i < components.size(); i++) {
                 Component c = components.get(i);
@@ -175,10 +167,8 @@ public class HttpServer {
      */
     private static Map<String, String> parseJson(String json) {
         Map<String, String> map = new HashMap<>();
-        json = json.substring(1, json.length() - 1); // Elimina los corchetes { }
+        json = json.substring(1, json.length() - 1);
         String[] pairs = json.split(",");
-
-        // Procesa cada par clave-valor en el JSON.
         for (String pair : pairs) {
             String[] keyValue = pair.split(":");
             if (keyValue.length == 2) {
@@ -199,16 +189,13 @@ public class HttpServer {
     private static void serveStaticFile(String path, OutputStream out) throws IOException {
         if (path.equals("/")) path = "/index.html";
 
-        // Busca el archivo estático en la carpeta "src/main/webapp"
         File file = new File("public" + path);
         if (file.exists() && !file.isDirectory()) {
-            // Determina el tipo de contenido según la extensión del archivo
             String contentType = getContentType(path);
             byte[] fileBytes = Files.readAllBytes(file.toPath());
             out.write(("HTTP/1.1 200 OK\r\nContent-Type: " + contentType + "\r\n\r\n").getBytes());
             out.write(fileBytes);
         } else {
-            // Si el archivo no existe, responde con 404.
             out.write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
         }
     }

@@ -19,12 +19,10 @@ public class HttpServerIntegrationTest {
 
     @BeforeAll
     public static void setUp() throws IOException, InterruptedException {
-        // Iniciar el servidor con la clase correcta (com.arep.HttpServer)
         serverProcess = new ProcessBuilder("java", "-cp", "target/classes", "com.arep.HttpServer")
-                .redirectErrorStream(true) // Redirigir errores a la salida estándar
+                .redirectErrorStream(true)
                 .start();
         
-        // Leer la salida del servidor para depuración
         new Thread(() -> {
             try (BufferedReader reader = new BufferedReader(
                     new InputStreamReader(serverProcess.getInputStream()))) {
@@ -36,9 +34,7 @@ public class HttpServerIntegrationTest {
                 e.printStackTrace();
             }
         }).start();
-        
-        // Esperar a que el servidor esté listo (con mayor tiempo de espera)
-        waitForServerStart(PORT, 15000); // 15 segundos
+        waitForServerStart(PORT, 15000);
     }
 
     private static void waitForServerStart(int port, int timeoutMillis) throws InterruptedException {
@@ -50,7 +46,6 @@ public class HttpServerIntegrationTest {
                 isPortOpen = true;
                 System.out.println("¡Servidor iniciado en el puerto " + port + "!");
             } catch (IOException e) {
-                // Esperar 200 ms antes de intentar de nuevo
                 Thread.sleep(200);
             }
         }
@@ -83,7 +78,6 @@ public class HttpServerIntegrationTest {
     @Test
     public void testPostComponent() throws Exception {
         HttpClient client = HttpClient.newHttpClient();
-        // Usar JSON válido con comillas escapadas correctamente
         String jsonBody = "{\"name\":\"Interstellar\",\"type\":\"MOVIE\",\"description\":\"Ciencia ficción\",\"rating\":5}";
         
         HttpRequest request = HttpRequest.newBuilder()

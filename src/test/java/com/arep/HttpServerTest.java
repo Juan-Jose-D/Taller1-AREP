@@ -10,7 +10,6 @@ public class HttpServerTest {
 
     @Test
     public void testHandleApiRequestGet() throws IOException {
-        // Limpiar componentes antes de cada prueba
         HttpServer.components.clear();
         HttpServer.components.add(new Component("Test", "BOOK", "Descripción", 4));
         
@@ -33,10 +32,7 @@ public class HttpServerTest {
 
     @Test
     public void testHandleApiRequestPost() throws IOException {
-        // Limpiar componentes antes de cada prueba
         HttpServer.components.clear();
-        
-        // JSON válido con "rating" completo y Content-Length correcto
         String jsonBody = "{\"name\":\"Breaking Bad\",\"type\":\"SHOW\",\"description\":\"Serie de TV\",\"rating\":5}";
         int contentLength = jsonBody.length();
         

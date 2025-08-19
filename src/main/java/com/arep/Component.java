@@ -1,5 +1,11 @@
 package com.arep;
 
+
+/**
+ * Esta clase encapsula información básica que en nuestro caso representa un componente que puede
+ * ser libro, película o serie y que tiene un nombre, su tipo, una descripción y una calificación.
+ * Además se incluten los getters por cada atributo.
+ */
 class Component {
     private String name;
     private String type;
