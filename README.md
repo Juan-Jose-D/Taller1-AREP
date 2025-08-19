@@ -33,18 +33,18 @@ Y justo después hce un get a /api/components y recibe la información del compo
 .
 ├── .mvn/                    # Configuración de Maven Wrapper
 ├── public/                  # Archivos estáticos accesibles desde el navegador
-├── images/                  # Carpeta con imágenes usadas en la aplicación y en el readme
-├── app.js                   # Lógica del lado del cliente en JavaScript
-├── index.html               # Página principal de la aplicación
-└── styles.css               # Hojas de estilo para dar diseño a la interfaz
-├── src/                          # Código fuente y pruebas
-│   ├── main/                     # Código principal
+│   ├── images/              # Carpeta con imágenes usadas en la aplicación y en el readme 
+│   ├── app.js               # Lógica del lado del cliente en JavaScript
+│   ├── index.html           # Página principal de la aplicación
+│   └── styles.css           # Hojas de estilo para dar diseño a la interfaz           
+├── src/                     # Código fuente y pruebas
+│   ├── main/                # Código principal
 │   │   ├── java/                 
 │   │   │   └── com/
 │   │   │       └── arep/
 │   │   │           └── Component.java    # Clase modelo para representar un componente
 │   │   │           └── HttpServer.java   # Clase principal del servidor
-│   └── test/                     # Código de pruebas unitarias
+│   └── test/                             # Código de pruebas unitarias
 │       └── java/
 │           └── com/
 │               └── arep/
