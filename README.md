@@ -91,7 +91,7 @@ mvn test
 
 ---
 
-## Deployment
+## Despliegue
 
 Para desplegar este servidor en un sistema en producción.
 
