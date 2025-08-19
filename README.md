@@ -1,4 +1,4 @@
-# AREP Taller 1 
+# Arquitecturas empresariales - Taller 1 
 
 Este proyecto implementa un servidor web en Java que maneja múltiples solicitudes de manera secuencial (no concurrente). El servidor es capaz de leer archivos del disco local y devolver cualquier archivo solicitado, incluyendo páginas HTML, archivos JavaScript, CSS e imágenes. Implementa uuna arquitectura de servidow web sencillo basado en java, donde el servidor HTTP básico se ejecuta, acepta solicitudes de clientes, las procesa y envía las respuestas.
 
@@ -54,6 +54,60 @@ Y justo después hce un get a /api/components y recibe la información del compo
 ├── target/                       # Archivos compilados y empaquetados (generado por Maven)
 ├── pom.xml                       # Configuración de Maven (dependencias y build)
 └── README.md
+```
+
+---
+
+## Arquitectura del proyecto
+
+
+**Backend (Servidor Java)**
+
+
+El backend está compuesto por un servidor HTTP implementado en Java que:
+
+- Utiliza ServerSocket para escuchar en el puerto 35000
+- Maneja dos tipos de solicitudes:
+  - Archivos estáticos: Sirve recursos (HTML, CSS, JS, imágenes) desde la carpeta public/
+  - API REST: Expone endpoints en /api/components con:
+
+    - GET /api/components → Devuelve todos los componentes en formato JSON
+    - POST /api/components → Agrega un nuevo componente (recibe JSON en el cuerpo)
+
+
+Características clave:
+
+Manejo de JSON: Implementa parser personalizado para solicitudes POST
+Tipos MIME: Detecta automáticamente content-type para archivos estáticos
+Almacenamiento: Mantiene componentes en memoria (lista static)
+
+
+**Frontend (Aplicación Web)**
+
+Interfaz construida con:
+
+- index.html: Estructura principal con formulario y tabla para mostrar los componentes.
+- styles.css: Estilos visuales.
+- app.js: Lógica de cliente que comunica con el API usando fetch(), maneja eventos del formulario y actualiza dinámicamente la tabla de componentes
+
+```mermaid
+sequenceDiagram
+    Frontend->>Backend: GET / (solicita index.html)
+    Backend-->>Frontend: Archivos estáticos (HTML/CSS/JS)
+ 
+    Frontend->>Backend: GET /api/components
+    Backend-->>Frontend: JSON con lista de componentes
+
+    Note right of Frontend: Vacío porque no hay persistencia
+    Frontend->>Frontend: Renderiza tabla con componentes
+    
+    Frontend->>Backend: POST /api/components (nuevo componente)
+    Backend-->>Frontend: 201 Created
+    
+    Frontend->>Backend: GET /api/components (refrescar lista)
+    Backend-->>Frontend: JSON actualizado
+    Frontend->>Frontend: Actualiza tabla dinámicamente
+
 ```
 
 ---
@@ -120,6 +174,34 @@ Para ejecutar las pruebas automatizadas use este comando de maven:
 mvn test
 ```
 
+Resultados esperados:
+
+```bash
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.arep.ComponentTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, 
+Time elapsed: 0.052 s -- in com.arep.ComponentTest
+[INFO] Running com.arep.HttpServerIntegrationTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, 
+Time elapsed: 0.504 s -- in com.arep.HttpServerIntegrationTest
+[INFO] Running com.arep.HttpServerTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, 
+Time elapsed: 0.009 s -- in com.arep.HttpServerTest
+[INFO] 
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] --------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] --------------------------------------------------------
+[INFO] Total time:  2.589 s
+[INFO] Finished at: 2025-08-18T22:07:40-05:00
+[INFO] --------------------------------------------------------
+```
+
 ---
 
 ## Despliegue
@@ -155,3 +237,5 @@ java -jar target/taller1-arep-1.0-SNAPSHOT.jar
 Juan José Díaz - [github](https://github.com/Juan-Jose-D)
 
 Escuela Colombiana de ingeniería Julio Garavito
+
+
