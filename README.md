@@ -8,21 +8,21 @@ Este proyecto implementa un servidor web en Java que maneja múltiples solicitud
 
 La aplicación web funciona como una lista para guarda los libros, películas y series que el usuario haya visto y quiera guardar para futuros recuerdos, puede añadir una descripción y una calificación.
 
-![alt text](/public/images/image.png)
+![screenshot](/public/images/image.png)
 
 Puede especificar si es un libro, película o serie.
 
-![alt text](/public/images/image2.png)
+![screenshot](/public/images/image2.png)
 
-![alt text](/public/images/image3.png)
+![screenshot](/public/images/image3.png)
 
 En la opción de Network de la herramienta de inspección del navegador podemos observar que hace un post al endpoint /api/components para crear el componente.
 
-![alt text](/public/images/image5.png)
+![screenshot](/public/images/image5.png)
 
 Y justo después hce un get a /api/components y recibe la información del componente en formato json
 
-![alt text](/public/images/image4.png)
+![screenshot](/public/images/image4.png)
 
 
 ---
@@ -71,7 +71,7 @@ Y ejecute el servidor:
 java -cp target/classes com.arep.HttpServer
 ```
 
-![alt text](/public/images/image6.png)
+![screenshot](/public/images/image6.png)
 
 Abra su navegador y acceda a:
 
@@ -89,6 +89,8 @@ Para ejecutar las pruebas automatizadas use este comando de maven:
 mvn test
 ```
 
+---
+
 ## Deployment
 
 Para desplegar este servidor en un sistema en producción.
@@ -105,6 +107,8 @@ Ejecute el JAR generado:
 java -jar target/taller1-arep-1.0-SNAPSHOT.jar 
 ```
 
+---
+
 ## Herramientas usadas
 
 - Java SE – Lenguaje de programación orientado a objetos para aplicaciones de propósito general.
@@ -113,7 +117,10 @@ java -jar target/taller1-arep-1.0-SNAPSHOT.jar
 - JavaScript – Lenguaje de programación que permite crear interactividad y lógica en aplicaciones web del lado del cliente (y también del servidor con Node.js).
 - CSS – Lenguaje de estilos que define la presentación y diseño visual de documentos HTML.
 
+---
+
 ## Autor
 
-Juan José Díaz - AREP Taller 1
-[github](https://github.com/Juan-Jose-D)
+Juan José Díaz - [github](https://github.com/Juan-Jose-D)
+
+Escuela Colombiana de ingeniería Julio Garavito
