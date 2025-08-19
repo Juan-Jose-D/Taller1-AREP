@@ -41,7 +41,7 @@ Para ejecutar este proyecto necesitas instalar lo siguiente:
 - Maven 3.8.1 o superior (la versión en el entorno donde fue creado es la 3.9.9)
 - Un navegador web
   
-En caso de no tener maven instalado, aquí se encuentra un tutorial [Instalación de Maven]([/guides/content/editing-an-existing-page](https://dev.to/vanessa_corredor/instalar-manualmente-maven-en-windows-10-50pb)). 
+En caso de no tener maven instalado, aquí se encuentra un tutorial [Instalación de Maven](https://es.stackoverflow.com/questions/65317/como-instalar-maven-en-windows). 
 
 ### Instalación
 
