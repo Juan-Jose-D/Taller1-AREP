@@ -53,11 +53,67 @@ Clone este repositorio:
 git clone https://github.com/AnaDuranB/Taller-01-AREP.git
 ```
 
-Ingresa al directorio del proyecto:
-cd Taller-01-AREP
-En caso de no contar con un IDE de java que se haga responsable de la compilación y ejecución:
+Ingrese al directorio del proyecto:
 
-Compila el proyecto con Maven:
+```bash
+cd Taller1-AREP
+```
+
+Compile el proyecto con Maven:
+
+```bash
 mvn clean compile
-Ejecuta el servidor:
-java -cp target/classes org.example.HttpServer
+```
+
+Y ejecute el servidor:
+
+```bash
+java -cp target/classes com.arep.HttpServer
+```
+
+![alt text](/public/images/image6.png)
+
+Abra su navegador y acceda a:
+
+```bash
+http://localhost:35000/index.html
+```
+
+---
+
+## Pruebas
+
+Para ejecutar las pruebas automatizadas use este comando de maven:
+
+```bash
+mvn test
+```
+
+## Deployment
+
+Para desplegar este servidor en un sistema en producción.
+
+Empaquete el proyecto en un JAR ejecutable:
+
+```bash
+mvn clean package
+```
+
+Ejecute el JAR generado:
+
+```bash
+java -jar target/taller1-arep-1.0-SNAPSHOT.jar 
+```
+
+## Herramientas usadas
+
+- Java SE – Lenguaje de programación orientado a objetos para aplicaciones de propósito general.
+- Maven – Herramienta de gestión de dependencias y automatización de la construcción de proyectos Java.
+- HTML5 – Lenguaje de marcado estándar para estructurar el contenido de páginas web.
+- JavaScript – Lenguaje de programación que permite crear interactividad y lógica en aplicaciones web del lado del cliente (y también del servidor con Node.js).
+- CSS – Lenguaje de estilos que define la presentación y diseño visual de documentos HTML.
+
+## Autor
+
+Juan José Díaz - AREP Taller 1
+[github](https://github.com/Juan-Jose-D)
