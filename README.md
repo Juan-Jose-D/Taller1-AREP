@@ -4,6 +4,37 @@ Este proyecto implementa un servidor web en Java que maneja múltiples solicitud
 
 ---
 
+## Estructura de archivos del proyecto
+
+```bash
+.
+├── .mvn/                    # Configuración de Maven Wrapper
+├── public/                  # Archivos estáticos accesibles desde el navegador
+├── images/                  # Carpeta con imágenes usadas en la aplicación y en el readme
+├── app.js                   # Lógica del lado del cliente en JavaScript
+├── index.html               # Página principal de la aplicación
+└── styles.css               # Hojas de estilo para dar diseño a la interfaz
+├── src/                          # Código fuente y pruebas
+│   ├── main/                     # Código principal
+│   │   ├── java/                 
+│   │   │   └── com/
+│   │   │       └── arep/
+│   │   │           └── Component.java    # Clase modelo para representar un componente con atributos básicos
+│   │   │           └── HttpServer.java   # Clase principal del servidor
+│   └── test/                     # Código de pruebas unitarias
+│       └── java/
+│           └── com/
+│               └── arep/
+│                   └── ComponentTest.java
+│                   └── HttpServerIntegrationTest.java
+│                   └── HttpServerTest.java
+├── target/                       # Archivos compilados y empaquetados (generado por Maven)
+├── pom.xml                       # Configuración de Maven (dependencias y build)
+└── README.md
+```
+
+---
+
 ## Capturas de pantalla de la aplicación
 
 La aplicación web funciona como una lista para guarda los libros, películas y series que el usuario haya visto y quiera guardar para futuros recuerdos, puede añadir una descripción y una calificación.
