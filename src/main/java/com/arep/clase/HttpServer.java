@@ -5,12 +5,16 @@
 package com.arep.clase;
 
 import java.net.*;
-
+import java.util.*;
 import java.io.*;
 
 public class HttpServer {
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+
+
+    public static Map<String, Service> services = new HashMap<String, Service>();
+
+    public static void startServer(String[] args) throws IOException, URISyntaxException {
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(35000);
@@ -52,11 +56,51 @@ public class HttpServer {
                 }
             }
             
-            if (requesturi.getPath().startsWith("/app/hello")) {
-                outputLine = helloService(requesturi);
+            if (requesturi.getPath().startsWith("/app")) {
+                outputLine = processRequest(requesturi);
             } else {
             
-            outputLine = "HTTP/1.1 200 OK\n\r"
+            outputLine =  defaultResponse() + inputLine;
+            }
+            out.println(outputLine);
+            out.close();
+            in.close();
+            clientSocket.close();
+        }
+
+        serverSocket.close();
+    }
+
+    private static String processRequest(URI requesturi){
+        String serviceRoute = requesturi.getPath().substring(4);
+        Service service = services.get(serviceRoute);
+
+        HttpRequest req = new HttpRequest(requesturi);
+        HttpResponse res = new HttpResponse();
+
+        String header = "HTTP/1.1 200 OK\n\r"
+                    + "content-type: application/json\n\r"
+                    + "\n\r";
+
+        return header + service.executeService(req, res);
+    }
+
+    private static String helloService(URI requesturi) {
+        String response = "HTTP/1.1 200 OK\n\r"
+                    + "content-type: application/json\n\r"
+                    + "\n\r";
+        response += "{\"mensaje\": \"Hola Juan\"}";
+        return response;
+    }
+
+    public static void get(String route, Service s){
+        services.put(route, s);
+    }
+
+    public static void staticfiles(String path){}
+
+    public static String defaultResponse(){
+        return  "HTTP/1.1 200 OK\n\r"
                     + "content-type: text/html\n\r"
                     + "\n\r"
                     + "<!DOCTYPE html>\n"
@@ -107,23 +151,6 @@ public class HttpServer {
                     + "}\n"
                     + "</script>\n"
                     + "</body>\n"
-                    + "</html>"
-                    + inputLine;
-            }
-            out.println(outputLine);
-            out.close();
-            in.close();
-            clientSocket.close();
-        }
-
-        serverSocket.close();
-    }
-
-    private static String helloService(URI requesturi) {
-        String response = "HTTP/1.1 200 OK\n\r"
-                    + "content-type: application/json\n\r"
-                    + "\n\r";
-        response += "{\"mensaje\": \"Hola Juan\"}";
-        return response;
+                    + "</html>"; 
     }
 }
