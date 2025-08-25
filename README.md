@@ -135,7 +135,7 @@ Siga estos pasos para obtener un entorno de desarrollo funcional:
 Clone este repositorio:
 
 ```bash
-git clone https://github.com/AnaDuranB/Taller-01-AREP.git
+git clone https://github.com/Juan-Jose-D/Taller1-AREP.git
 ```
 
 Ingrese al directorio del proyecto:
